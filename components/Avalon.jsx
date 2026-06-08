@@ -515,20 +515,22 @@ export default function Avalon() {
       {stage !== 'setup' && (
         <section className="stage">
           <div className="main-col">
-            <div className="controls">
-              {stage === 'playing' && <button className="btn ghost" onClick={togglePause}>{paused ? <><Play size={15} /> 继续</> : <><Pause size={15} /> 暂停</>}</button>}
-              {stage === 'playing' && manual && <button className="btn ghost" onClick={doStep}><ChevronRight size={15} /> 下一步</button>}
-              <button className="btn ghost" onClick={resetGame}><RotateCw size={15} /> {stage === 'ended' ? '再来一局' : '重置'}</button>
-              <div className="spacer" />
-              {stage === 'playing' && (
-                <div className="speed-pick">
-                  {[['慢', 5200], ['中', 2600], ['快', 1100]].map(([l, ms]) => (
-                    <button key={ms} className={speed === ms ? 'on' : ''} onClick={() => setSpeed(ms)}>{l}</button>
-                  ))}
-                </div>
-              )}
+            <div className="control-bar">
+              <div className="controls">
+                {stage === 'playing' && <button className="btn ghost" onClick={togglePause}>{paused ? <><Play size={15} /> 继续</> : <><Pause size={15} /> 暂停</>}</button>}
+                {stage === 'playing' && manual && <button className="btn ghost" onClick={doStep}><ChevronRight size={15} /> 下一步</button>}
+                <button className="btn ghost" onClick={resetGame}><RotateCw size={15} /> {stage === 'ended' ? '再来一局' : '重置'}</button>
+                <div className="spacer" />
+                {stage === 'playing' && (
+                  <div className="speed-pick">
+                    {[['慢', 5200], ['中', 2600], ['快', 1100]].map(([l, ms]) => (
+                      <button key={ms} className={speed === ms ? 'on' : ''} onClick={() => setSpeed(ms)}>{l}</button>
+                    ))}
+                  </div>
+                )}
+              </div>
+              {status ? <div className="sys status-line">⏳ {status}</div> : null}
             </div>
-            {status ? <div className="sys">⏳ {status}</div> : null}
 
             <div className="feed">
               {feed.map(renderItem)}
